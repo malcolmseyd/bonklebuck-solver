@@ -45,7 +45,7 @@ function simply reads in the text, parses it into an AST, evaluates the AST to a
 solution, rounds the number, and formats it as a string. This result is then
 stored in `output`, which triggers a rerender and is displayed on the page.
 
-```clojurescript
+```clojure
 (defonce input (r/atom ""))
 (defonce output (r/atom ""))
 
@@ -61,7 +61,7 @@ stored in `output`, which triggers a rerender and is displayed on the page.
 The UI is very simple thanks to the HTML DST that Reagent uses. The relevant
 components read input, display output, and call the `solve` function.
 
-```clojurescript
+```clojure
 (defn inputarea []
   [:textarea {:value @input
               :placeholder "Please enter the bonkle problem here."
@@ -80,7 +80,7 @@ components read input, display output, and call the `solve` function.
 The `bonkle-parser` function is generated using Instaparse's `defparser` macro,
 with the parsing grammar passed in as a string argument.
 
-```clojurescript
+```clojure
 (defparser bonkle-parser "
 solution = w? <'What is'> w total w <'rounded to 2 decimal places?'> w?
 <w> = <#'\\s+'>
@@ -107,7 +107,7 @@ first constructing numbers from their word representation, then evaluating the
 math expressions on those numbers (order of operations is handled in the parser,
 so the evaluator is very simple).
 
-```clojurescript
+```clojure
 (defn eval-bonkle [ast]
   (if-not (vector? ast)
     ast
